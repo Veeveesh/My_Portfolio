@@ -16,7 +16,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=1000)
     Description = models.CharField(max_length=2000)
     Content = models.CharField(max_length=7000)
-    image = models.ImageField((""), upload_to=None, height_field=None, width_field=None, max_length=None)
+    image = models.ImageField((""), upload_to='Blog_media', height_field=None, width_field=None, max_length=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
 
