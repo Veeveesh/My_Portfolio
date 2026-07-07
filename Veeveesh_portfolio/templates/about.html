@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Veeveesh Portfolio</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(-45deg,#0f172a,#1e293b,#1d4ed8,#312e81);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    color:white;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Navigation */
+
+header{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    z-index:999;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+.logo span{
+    color:white;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:30px;
+    transition:.3s;
+    font-weight:500;
+}
+
+nav a:hover{
+    color:#38bdf8;
+}
+
+/* Hero */
+
+.hero{
+    padding:150px 8% 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:50px;
+}
+
+.image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.profile{
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:130px;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+    transition:.4s;
+}
+
+.profile:hover{
+    transform:scale(1.05);
+}
+
+.content{
+    flex:1;
+    min-width:320px;
+}
+
+.content h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.content h1 span{
+    color:#38bdf8;
+}
+
+.content p{
+    line-height:1.9;
+    color:#ddd;
+    margin-bottom:20px;
+    font-size:17px;
+}
+
+.button{
+    display:inline-block;
+    margin-top:20px;
+    padding:15px 35px;
+    background:#38bdf8;
+    color:white;
+    text-decoration:none;
+    border-radius:40px;
+    transition:.3s;
+    font-weight:bold;
+}
+
+.button:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 20px #38bdf8;
+}
+
+/* Sections */
+
+section{
+    padding:70px 8%;
+}
+
+.title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:45px;
+    color:#38bdf8;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    padding:35px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.1);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.card h3{
+    color:#38bdf8;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#ddd;
+    line-height:1.8;
+}
+
+.timeline{
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:15px;
+    top:0;
+    width:3px;
+    height:100%;
+    background:#38bdf8;
+}
+
+.item{
+    position:relative;
+    margin-left:45px;
+    margin-bottom:40px;
+}
+
+.item::before{
+    content:"";
+    width:18px;
+    height:18px;
+    background:#38bdf8;
+    border-radius:50%;
+    position:absolute;
+    left:-39px;
+    top:8px;
+}
+
+.item h3{
+    color:#38bdf8;
+    margin-bottom:8px;
+}
+
+.item p{
+    color:#ddd;
+    line-height:1.8;
+}
+
+footer{
+    padding:30px;
+    text-align:center;
+    background:rgba(0,0,0,.3);
+    margin-top:50px;
+}
+
+footer p{
+    color:#ddd;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+header{
+    flex-direction:column;
+    gap:20px;
+}
+
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+nav a{
+    margin:10px;
+}
+
+.hero{
+    text-align:center;
+}
+
+.content h1{
+    font-size:42px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+Vee<span>veesh</span>
+</div>
+
+<nav>
+
+<a href="{% url 'home' %}">Home</a>
+<a href="{% url 'about' %}">About</a>
+<a href="{% url 'projects' %}">Projects</a>
+<a href="{% url 'skills' %}">Skills</a>
+
+</nav>
+
+</header>
+
+<div class="hero">
+
+<div class="image">
+
+<div class="profile">
+👨‍💻
+</div>
+
+</div>
+
+<div class="content">
+
+<h1>About <span>Me</span></h1>
+
+<p>
+Hello! I'm <strong>Veeveesh</strong>, a passionate software developer and technology enthusiast who enjoys building clean, responsive, and user-friendly applications. I love turning ideas into functional digital experiences through thoughtful design and efficient programming.
+</p>
+
+<p>
+My interests span web development, software engineering, user interface design, and continuous learning. I enjoy solving challenging problems and collaborating on innovative projects that create meaningful impact.
+</p>
+
+<a href="#" class="button">Download CV</a>
+
+</div>
+
+</div>
+
+<section>
+
+<h2 class="title">Education & Experience</h2>
+
+<div class="timeline">
+
+<div class="item">
+<h3>Bachelor's Degree</h3>
+<p>
+Currently pursuing studies in Computer Science while strengthening my knowledge in software engineering, programming, and modern web technologies.
+</p>
+</div>
+
+<div class="item">
+<h3>Frontend Development</h3>
+<p>
+Developing responsive websites using HTML, CSS, JavaScript, and modern UI principles while focusing on clean code and accessibility.
+</p>
+</div>
+
+<div class="item">
+<h3>Continuous Learning</h3>
+<p>
+Regularly expanding my expertise by exploring new frameworks, programming languages, and development tools.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">Interests</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>💻 Web Development</h3>
+
+<p>
+Creating modern websites that are responsive, accessible, and visually engaging.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📱 UI/UX Design</h3>
+
+<p>
+Designing clean and intuitive interfaces that improve user experience.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🚀 Technology</h3>
+
+<p>
+Exploring emerging technologies and continuously improving my programming skills.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">Let's Connect</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Email</h3>
+
+<p>
+veeveesh@example.com
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Location</h3>
+
+<p>
+Nigeria
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Availability</h3>
+
+<p>
+Open to collaborations, freelance opportunities, internships, and exciting software projects.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Veeveesh Portfolio | Designed with HTML & CSS
+</p>
+
+</footer>
+
+</body>
+</html>

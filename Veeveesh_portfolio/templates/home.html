@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veeveesh | Portfolio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(-45deg,#0f172a,#1e293b,#1d4ed8,#312e81);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+    color:white;
+    min-height:100vh;
+}
+
+@keyframes gradientBG{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
+
+header{
+
+width:100%;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:fixed;
+top:0;
+left:0;
+backdrop-filter:blur(20px);
+background:rgba(255,255,255,.08);
+border-bottom:1px solid rgba(255,255,255,.1);
+z-index:999;
+
+}
+
+.logo{
+
+font-size:32px;
+font-weight:bold;
+letter-spacing:2px;
+color:#38bdf8;
+
+}
+
+.logo span{
+
+color:white;
+
+}
+
+nav a{
+
+color:white;
+text-decoration:none;
+margin-left:30px;
+font-weight:500;
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#38bdf8;
+
+}
+
+.hero{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:150px 8% 80px;
+flex-wrap:wrap;
+gap:50px;
+
+}
+
+.hero-text{
+
+flex:1;
+min-width:320px;
+
+}
+
+.hero-text h3{
+
+font-size:24px;
+margin-bottom:10px;
+color:#38bdf8;
+
+}
+
+.hero-text h1{
+
+font-size:60px;
+margin-bottom:20px;
+
+}
+
+.hero-text span{
+
+color:#38bdf8;
+
+}
+
+.hero-text p{
+
+font-size:18px;
+line-height:1.8;
+margin-bottom:35px;
+color:#d1d5db;
+
+}
+
+.buttons{
+
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+
+}
+
+.btn{
+
+padding:15px 32px;
+text-decoration:none;
+border-radius:40px;
+font-weight:bold;
+transition:.4s;
+
+}
+
+.primary{
+
+background:#38bdf8;
+color:white;
+
+}
+
+.primary:hover{
+
+transform:translateY(-5px);
+box-shadow:0 0 20px #38bdf8;
+
+}
+
+.secondary{
+
+border:2px solid #38bdf8;
+color:#38bdf8;
+
+}
+
+.secondary:hover{
+
+background:#38bdf8;
+color:white;
+
+}
+
+.hero-image{
+
+flex:1;
+display:flex;
+justify-content:center;
+
+}
+
+.glass{
+
+width:340px;
+height:340px;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.15);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:150px;
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+transition:.5s;
+
+}
+
+.glass:hover{
+
+transform:scale(1.05) rotate(5deg);
+
+}
+
+section{
+
+padding:80px 8%;
+
+}
+
+.section-title{
+
+text-align:center;
+font-size:40px;
+margin-bottom:50px;
+color:#38bdf8;
+
+}
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.08);
+padding:35px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+transition:.4s;
+border:1px solid rgba(255,255,255,.1);
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.card h3{
+
+margin-bottom:15px;
+color:#38bdf8;
+
+}
+
+.card p{
+
+line-height:1.8;
+color:#ddd;
+
+}
+
+footer{
+
+padding:30px;
+text-align:center;
+background:rgba(0,0,0,.3);
+margin-top:50px;
+
+}
+
+footer p{
+
+color:#ddd;
+
+}
+
+@media(max-width:900px){
+
+header{
+
+flex-direction:column;
+gap:20px;
+
+}
+
+nav{
+
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+
+}
+
+nav a{
+
+margin:10px;
+
+}
+
+.hero{
+
+text-align:center;
+padding-top:180px;
+
+}
+
+.hero-text h1{
+
+font-size:45px;
+
+}
+
+.buttons{
+
+justify-content:center;
+
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+    Vee<span>veesh</span>
+</div>
+
+<nav>
+
+<a href="{% url 'home' %}">Home</a>
+<a href="{% url 'about' %}">About</a>
+<a href="{% url 'projects' %}">Projects</a>
+<a href="{% url 'skills' %}">Skills</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h3>Hello, I'm</h3>
+
+<h1>Veeveesh <span>Developer</span></h1>
+
+<p>
+
+I build elegant, responsive, and user-friendly websites and applications.
+My passion lies in transforming creative ideas into beautiful digital
+experiences while writing clean and maintainable code.
+
+</p>
+
+<div class="buttons">
+
+<a href="{% url 'projects' %}" class="btn primary">View Projects</a>
+
+<a href="{% url 'about' %}" class="btn secondary">About Me</a>
+
+</div>
+
+<div class="hero-image">
+
+<div class="glass">
+👨‍💻
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">
+Featured Skills
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Web Development</h3>
+
+<p>
+
+Building responsive websites using HTML, CSS, JavaScript and modern design principles.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>UI/UX Design</h3>
+
+<p>
+
+Creating visually appealing interfaces that provide intuitive user experiences.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Problem Solving</h3>
+
+<p>
+
+Developing efficient software solutions with clean architecture and optimized performance.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">
+What I Do
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Frontend Development</h3>
+
+<p>
+
+Responsive websites with modern layouts, animations, and accessibility in mind.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Backend Development</h3>
+
+<p>
+
+Developing secure applications and APIs with scalable architecture.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Continuous Learning</h3>
+
+<p>
+
+Always exploring new technologies to improve my development skills and deliver better solutions.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© {% now "Y" %} Veeveesh Portfolio. Designed with Django, HTML & CSS.
+</p>
+
+</footer>
+
+</body>
+</html>
