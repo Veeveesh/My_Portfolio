@@ -4,522 +4,772 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects | Veeveesh Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --ink:       #f4f3ef;
+  --surface:   #ffffff;
+  --panel:     #eeece7;
+  --border:    rgba(0,0,0,.08);
+  --muted:     #7c7b76;
+  --body:      #3d3c38;
+  --heading:   #111110;
+  --accent:    #6d28d9;
+  --accent2:   #db2777;
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'DM Sans', sans-serif;
+  --radius:    16px;
+  --nav-h:     72px;
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  /* theme-sensitive tokens */
+  --nav-bg:          rgba(244,243,239,.82);
+  --mobile-nav-bg:   rgba(244,243,239,.97);
+  --dot-grid:        rgba(0,0,0,.035);
+  --btn-text:        #ffffff;
+  --tag-bg:          rgba(109,40,217,.07);
+  --tag-border:      rgba(109,40,217,.18);
+  --tag-hover-bg:    rgba(109,40,217,.14);
+  --tag-hover-border:rgba(109,40,217,.35);
+  --badge-bg:        rgba(109,40,217,.06);
+  --badge-border:    rgba(109,40,217,.15);
+  --badge-hover-bg:  rgba(109,40,217,.14);
+  --badge-hover-bdr: rgba(109,40,217,.35);
+  --active-pill-bg:  rgba(109,40,217,.09);
+  --mobile-active-bg:rgba(109,40,217,.09);
+  --mobile-hover-bg: rgba(0,0,0,.05);
+  --footer-bg:       rgba(0,0,0,.04);
+  --connect-hover:   rgba(109,40,217,.3);
+  --project-hover:   rgba(109,40,217,.25);
+  --card-border-hov: rgba(109,40,217,.3);
+  --terminal-border: rgba(109,40,217,.3);
+  --grid-line:       rgba(109,40,217,.07);
+  --circle-border:   rgba(109,40,217,.14);
+  --avatar-bg:       linear-gradient(135deg, rgba(109,40,217,.08), rgba(219,39,119,.04));
 }
 
-html{
-    scroll-behavior:smooth;
+
+[data-theme="dark"] {
+  --ink:         #0a0a0f;
+  --surface:     #111118;
+  --panel:       #18181f;
+  --border:      rgba(255,255,255,.07);
+  --muted:       #6b7280;
+  --body:        #c8cdd6;
+  --heading:     #f0f2f5;
+  --accent:      #a78bfa;
+  --accent2:     #f472b6;
+  --glow:        rgba(167,139,250,.18);
+
+  /* hardcoded overrides */
+  --nav-bg:          rgba(10,10,15,.7);
+  --mobile-nav-bg:   rgba(10,10,15,.97);
+  --dot-grid:        rgba(255,255,255,.045);
+  --btn-text:        #0a0a0f;
+  --tag-bg:          rgba(167,139,250,.1);
+  --tag-border:      rgba(167,139,250,.2);
+  --tag-hover-bg:    rgba(167,139,250,.18);
+  --tag-hover-border:rgba(167,139,250,.4);
+  --badge-bg:        rgba(167,139,250,.08);
+  --badge-border:    rgba(167,139,250,.18);
+  --badge-hover-bg:  rgba(167,139,250,.18);
+  --badge-hover-bdr: rgba(167,139,250,.4);
+  --active-pill-bg:  rgba(167,139,250,.1);
+  --mobile-active-bg:rgba(167,139,250,.12);
+  --mobile-hover-bg: rgba(255,255,255,.06);
+  --footer-bg:       rgba(0,0,0,.3);
+  --connect-hover:   rgba(167,139,250,.4);
+  --project-hover:   rgba(167,139,250,.3);
+  --card-border-hov: rgba(167,139,250,.4);
+  --terminal-border: rgba(167,139,250,.2);
+  --grid-line:       rgba(167,139,250,.06);
+  --circle-border:   rgba(167,139,250,.12);
+  --avatar-bg:       linear-gradient(135deg, rgba(109,40,217,.08), rgba(219,39,119,.04));
 }
 
-body{
-    background:linear-gradient(-45deg,#0f172a,#1e293b,#1d4ed8,#312e81);
-    background-size:400% 400%;
-    animation:gradientBG 12s ease infinite;
-    color:white;
-    min-height:100vh;
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
 }
 
-@keyframes gradientBG{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+/* Subtle dot-grid atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dot-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Navigation */
 
-header{
-    width:100%;
-    position:fixed;
-    top:0;
-    left:0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 8%;
-    backdrop-filter:blur(20px);
-    background:rgba(255,255,255,.08);
-    border-bottom:1px solid rgba(255,255,255,.1);
-    z-index:999;
+
+
+
+/* NAV */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+}
+.logo { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--heading); letter-spacing: -0.5px; text-decoration: none; }
+.logo em { font-style: normal; color: var(--accent); }
+nav { display: flex; gap: 8px; }
+nav a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 7px 16px; border-radius: 40px; transition: color .2s, background .2s; }
+nav a:hover { color: var(--heading); background: var(--panel); }
+nav a.active { color: var(--accent); background: var(--active-pill-bg); }
+
+/* PAGE HERO */
+.page-header {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--nav-h);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px 7%;
+  flex-wrap: wrap;
 }
 
-.logo{
-    font-size:30px;
-    font-weight:bold;
-    color:#38bdf8;
+/* Terminal grid background */
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.logo span{
-    color:white;
+/* Diagonal accent stripe */
+.page-header::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -40px;
+  width: 480px;
+  height: 480px;
+  border: 1px solid var(--circle-border);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:30px;
-    transition:.3s;
-    font-weight:500;
+.header-terminal {
+  position: relative;
+  flex: 0 0 auto;
+  width: 320px;
+  background: rgba(10,10,15,.85);
+  border: 1px solid var(--terminal-border);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  z-index: 1;
 }
 
-nav a:hover{
-    color:#38bdf8;
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  background: rgba(0,0,0,.08);
+  border-bottom: 1px solid rgba(167,139,250,.12);
 }
 
-/* Hero */
+.t-dot { width: 10px; height: 10px; border-radius: 50%; }
+.t-dot.r { background: #ff5f57; }
+.t-dot.y { background: #febc2e; }
+.t-dot.g { background: #28c840; }
 
-.hero{
-    text-align:center;
-    padding:150px 8% 60px;
+.terminal-body { padding: 16px 18px; line-height: 1.9; }
+.t-comment { color: #6b7280; }
+.t-kw  { color: #7c3aed; }
+.t-fn  { color: #38bdf8; }
+.t-str { color: #86efac; }
+.t-num { color: #f9a8d4; }
+.t-dim { color: #4b5563; }
+.t-cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: #7c3aed;
+  vertical-align: middle;
+  animation: blink .9s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.page-hero {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 260px;
+  max-width: 520px;
+  padding: 8px 0;
 }
 
-.hero h1{
-    font-size:55px;
-    margin-bottom:15px;
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--heading);
+  line-height: 1.12;
+  margin-bottom: 20px;
 }
 
-.hero span{
-    color:#38bdf8;
+.page-hero p {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.85;
 }
 
-.hero p{
-    color:#ddd;
-    font-size:18px;
-    max-width:750px;
-    margin:auto;
-    line-height:1.8;
+/* PROJECTS */
+.projects-section {
+  position: relative;
+  z-index: 1;
+  padding: 20px 7% 90px;
 }
 
-/* Projects */
-
-.projects{
-    padding:30px 8% 80px;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:35px;
+/* Project Card */
+.project-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .25s, transform .3s;
 }
 
-.card{
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    overflow:hidden;
-    transition:.4s;
-    border:1px solid rgba(255,255,255,.1);
+.project-card:hover {
+  border-color: var(--project-hover);
+  transform: translateY(-6px);
 }
 
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 15px 35px rgba(0,0,0,.35);
+.card-thumb {
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  position: relative;
+  overflow: hidden;
 }
 
-.image{
-    height:200px;
-    background:linear-gradient(135deg,#38bdf8,#6366f1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:70px;
+/* Each project thumb gets a unique gradient */
+.thumb-1 { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+.thumb-2 { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); }
+.thumb-3 { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+.thumb-4 { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); }
+.thumb-5 { background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%); }
+.thumb-6 { background: linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 100%); }
+
+.card-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(238,236,231,.95));
 }
 
-.content{
-    padding:25px;
+.card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+
+.card-body h2 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 10px;
 }
 
-.content h2{
-    color:#38bdf8;
-    margin-bottom:15px;
+.card-body p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 20px;
 }
 
-.content p{
-    color:#ddd;
-    line-height:1.8;
-    margin-bottom:20px;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-/* Technology Tags */
-
-.tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:25px;
+.tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--accent);
 }
 
-.tag{
-    background:rgba(56,189,248,.15);
-    border:1px solid #38bdf8;
-    color:#38bdf8;
-    padding:8px 14px;
-    border-radius:30px;
-    font-size:14px;
-}
+.card-actions { display: flex; gap: 10px; }
 
-/* Buttons */
-
-.buttons{
-    display:flex;
-    gap:15px;
+.btn-ghost {
+  flex: 1;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: border-color .2s, color .2s;
 }
+.btn-ghost:hover { border-color: var(--connect-hover); color: var(--accent); }
 
-.btn{
-    flex:1;
-    text-align:center;
-    padding:12px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-    transition:.3s;
+.btn-accent {
+  flex: 1;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--accent);
+  color: var(--btn-text);
+  transition: opacity .2s;
 }
-
-.github{
-    border:2px solid #38bdf8;
-    color:#38bdf8;
-}
-
-.github:hover{
-    background:#38bdf8;
-    color:white;
-}
-
-.demo{
-    background:#38bdf8;
-    color:white;
-}
-
-.demo:hover{
-    transform:translateY(-4px);
-    box-shadow:0 0 20px #38bdf8;
-}
+.btn-accent:hover { opacity: .85; }
 
 /* CTA */
-
-.cta{
-    margin:70px auto;
-    width:85%;
-    padding:50px;
-    text-align:center;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
+.cta-strip {
+  position: relative;
+  z-index: 1;
+  margin: 0 7% 80px;
+  padding: 56px 56px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
-.cta h2{
-    margin-bottom:20px;
-    font-size:35px;
+.cta-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 700;
+  color: var(--heading);
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+.cta-text p { font-size: 15px; color: var(--muted); max-width: 420px; }
+
+.btn-primary {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: var(--btn-text);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 40px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .25s, box-shadow .25s;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px var(--glow); }
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer p { font-size: 13px; color: var(--muted); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  header { padding: 0 5%; }
+  .page-header { flex-direction: column; align-items: flex-start; padding: 40px 5%; gap: 28px; }
+  .header-terminal { width: 100%; }
+  .page-hero { max-width: 100%; }
+  .projects-section { padding: 10px 5% 70px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .cta-strip { margin: 0 5% 60px; padding: 36px 28px; flex-direction: column; }
+  footer { padding: 28px 5%; flex-direction: column; text-align: center; }
+  nav a { font-size: 13px; padding: 6px 11px; }
 }
 
-.cta p{
-    color:#ddd;
-    line-height:1.8;
-    margin-bottom:30px;
+@media (prefers-reduced-motion: reduce) { .project-card { transition: none; } }
+
+/* ── Hamburger Menu ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background .2s;
+  z-index: 1001;
+}
+.hamburger:hover { background: var(--panel); }
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--heading);
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s, width .3s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: var(--mobile-nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 12px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 998;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform .25s, opacity .25s;
+}
+.mobile-nav.open {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+}
+.mobile-nav a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--body);
+  text-decoration: none;
+  padding: 13px 16px;
+  border-radius: 10px;
+  border-bottom: none;
+  transition: color .2s, background .2s;
+}
+.mobile-nav a:hover {
+  color: var(--heading);
+  background: var(--mobile-hover-bg);
+}
+.mobile-nav a.active {
+  color: var(--accent);
+  background: var(--mobile-active-bg);
+  font-weight: 600;
 }
 
-.cta a{
-    text-decoration:none;
-    background:#38bdf8;
-    color:white;
-    padding:15px 35px;
-    border-radius:35px;
-    font-weight:bold;
-    transition:.3s;
+@media (max-width: 768px) {
+  nav { display: none; }
+  .hamburger { display: flex; }
 }
 
-.cta a:hover{
-    box-shadow:0 0 20px #38bdf8;
+
+/* ── Theme Toggle ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  flex-shrink: 0;
 }
-
-/* Footer */
-
-footer{
-    padding:30px;
-    text-align:center;
-    background:rgba(0,0,0,.3);
-}
-
-footer p{
-    color:#ddd;
-}
-
-/* Responsive */
-
-@media(max-width:900px){
-
-header{
-    flex-direction:column;
-    gap:20px;
-}
-
-nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-nav a{
-    margin:10px;
-}
-
-.hero h1{
-    font-size:42px;
-}
-
-.buttons{
-    flex-direction:column;
-}
-
-}
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle svg { width: 17px; height: 17px; stroke: var(--muted); transition: stroke .2s; }
+.theme-toggle:hover svg { stroke: var(--accent); }
+.icon-sun  { display: none; }
+.icon-moon { display: block; }
+[data-theme="dark"] .icon-sun  { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
 
 </style>
-
 </head>
 
 <body>
-
 <header>
+  <a href="{% url 'home' %}" class="logo">Vee<em>veesh</em></a>
+  <nav>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'projects' %}" class="active">Projects</a>
+    <a href="{% url 'skills' %}">Skills</a>
+  </nav>
 
-<div class="logo">
-Vee<span>veesh</span>
-</div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 
-<nav>
-
-<a href="{% url 'home' %}">Home</a>
-<a href="{% url 'about' %}">About</a>
-<a href="{% url 'projects' %}">Projects</a>
-<a href="{% url 'skills' %}">Skills</a>
-
-</nav>
 </header>
+<nav class="mobile-nav" id="mobileNav">
+<a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'projects' %}" class="active">Projects</a>
+    <a href="{% url 'skills' %}">Skills</a>
+</nav>
 
-<section class="hero">
-
-<h1>My <span>Projects</span></h1>
-
-<p>
-These are some projects that demonstrate my passion for software development,
-problem-solving, and creating responsive digital experiences.
-Each project reflects my dedication to writing clean, efficient, and maintainable code.
-</p>
-
-</section>
-
-<section class="projects">
-
-<div class="grid">
-
-<div class="card">
-
-<div class="image">
-💻
-</div>
-
-<div class="content">
-
-<h2>Portfolio Website</h2>
-
-<p>
-A responsive personal portfolio showcasing my skills, projects,
-and professional journey with modern UI and animations.
-</p>
-
-<div class="tags">
-<div class="tag">HTML</div>
-<div class="tag">CSS</div>
-<div class="tag">Responsive</div>
-</div>
-
-<div class="buttons">
-<a href="#" class="btn github">GitHub</a>
-<a href="#" class="btn demo">Live Demo</a>
-</div>
+<div class="page-header">
+  <div class="page-hero">
+    <div class="eyebrow">Selected Work</div>
+    <h1>Projects I've Built</h1>
+    <p>
+      Each project here reflects a real problem I tried to solve — with clean code, thoughtful design, and a commitment to shipping something that actually works.
+    </p>
+  </div>
+  <div class="header-terminal">
+    <div class="terminal-bar">
+      <div class="t-dot r"></div>
+      <div class="t-dot y"></div>
+      <div class="t-dot g"></div>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-comment"># veeveesh / projects</span></div>
+      <div><span class="t-kw">import</span> <span class="t-fn">portfolio</span></div>
+      <div class="t-dim">&nbsp;</div>
+      <div><span class="t-fn">projects</span> <span class="t-dim">=</span> [</div>
+      <div>&nbsp;&nbsp;<span class="t-str">"property_rental"</span><span class="t-dim">,</span></div>
+      <div>&nbsp;&nbsp;<span class="t-str">"student_records"</span><span class="t-dim">,</span></div>
+      <div>&nbsp;&nbsp;<span class="t-str">"task_manager"</span><span class="t-dim">,</span></div>
+      <div>&nbsp;&nbsp;<span class="t-num">3</span> <span class="t-comment">+ more...</span></div>
+      <div>]</div>
+      <div class="t-dim">&nbsp;</div>
+      <div><span class="t-fn">portfolio</span><span class="t-dim">.</span><span class="t-fn">render</span>() <span class="t-cursor"></span></div>
+    </div>
+  </div>
 
 </div>
 
+<div class="projects-section">
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="card-thumb thumb-1">💻</div>
+      <div class="card-body">
+        <h2>Portfolio Website</h2>
+        <p>A responsive personal portfolio showcasing skills, projects, and professional journey — built with Django, modern CSS, and smooth animations.</p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Django</span>
+          <span class="tag">Responsive</span>
+        </div>
+        <div class="card-actions">
+          <a href="#" class="btn-ghost">GitHub</a>
+          <a href="#" class="btn-accent">Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-thumb thumb-2">🏠</div>
+      <div class="card-body">
+        <h2>Property Rental System</h2>
+        <p>A full property management system — landlords can manage tenants, payments, maintenance requests, and rental agreements from one place.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">OOP</span>
+          <span class="tag">SQLite</span>
+        </div>
+        <div class="card-actions">
+          <a href="#" class="btn-ghost">GitHub</a>
+          <a href="#" class="btn-accent">Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-thumb thumb-3">📊</div>
+      <div class="card-body">
+        <h2>Student Record Manager</h2>
+        <p>A Python application for storing, retrieving, validating, and managing student academic records — with full CSV integration and data validation.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">CSV</span>
+          <span class="tag">Data</span>
+        </div>
+        <div class="card-actions">
+          <a href="#" class="btn-ghost">GitHub</a>
+          <a href="#" class="btn-accent">Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-thumb thumb-4">🌐</div>
+      <div class="card-body">
+        <h2>Business Website</h2>
+        <p>A modern responsive website for a local business — featuring elegant UI, contact forms, and layouts optimised for conversion.</p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <div class="card-actions">
+          <a href="#" class="btn-ghost">GitHub</a>
+          <a href="#" class="btn-accent">Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-thumb thumb-5">📱</div>
+      <div class="card-body">
+        <h2>Task Manager</h2>
+        <p>A productivity application for organising daily activities, tracking progress, and improving personal workflow efficiency.</p>
+        <div class="tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">UI/UX</span>
+        </div>
+        <div class="card-actions">
+          <a href="#" class="btn-ghost">GitHub</a>
+          <a href="#" class="btn-accent">Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-thumb thumb-6">🚀</div>
+      <div class="card-body">
+        <h2>Coming Soon</h2>
+        <p>Currently building something new — modern tech, cloud-native architecture, and a genuine problem worth solving. Watch this space.</p>
+        <div class="tags">
+          <span class="tag">In Progress</span>
+          <span class="tag">2025</span>
+        </div>
+        <div class="card-actions">
+          <a href="#" class="btn-ghost">GitHub</a>
+          <a href="#" class="btn-accent">Preview</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div class="card">
-
-<div class="image">
-🏠
+<div class="cta-strip">
+  <div class="cta-text">
+    <h2>Interested in Working Together?</h2>
+    <p>I'm always open to freelance projects, internships, and meaningful collaborations. Let's build something worth building.</p>
+  </div>
+  <a href="{% url 'about' %}" class="btn-primary">Get in Touch →</a>
 </div>
-
-<div class="content">
-
-<h2>Property Rental System</h2>
-
-<p>
-A property management system allowing landlords to manage tenants,
-payments, maintenance requests, and rental agreements efficiently.
-</p>
-
-<div class="tags">
-<div class="tag">Python</div>
-<div class="tag">OOP</div>
-<div class="tag">SQLite</div>
-</div>
-
-<div class="buttons">
-<a href="#" class="btn github">GitHub</a>
-<a href="#" class="btn demo">Live Demo</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="image">
-📊
-</div>
-
-<div class="content">
-
-<h2>Student Record Manager</h2>
-
-<p>
-A Python application for storing, retrieving, validating,
-and managing student academic records with CSV integration.
-</p>
-
-<div class="tags">
-<div class="tag">Python</div>
-<div class="tag">CSV</div>
-<div class="tag">Data</div>
-</div>
-
-<div class="buttons">
-<a href="#" class="btn github">GitHub</a>
-<a href="#" class="btn demo">Live Demo</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="image">
-🌐
-</div>
-
-<div class="content">
-
-<h2>Business Website</h2>
-
-<p>
-A modern responsive website developed for a local business,
-featuring elegant UI, contact forms, and optimized layouts.
-</p>
-
-<div class="tags">
-<div class="tag">HTML</div>
-<div class="tag">CSS</div>
-<div class="tag">JavaScript</div>
-</div>
-
-<div class="buttons">
-<a href="#" class="btn github">GitHub</a>
-<a href="#" class="btn demo">Live Demo</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="image">
-📱
-</div>
-
-<div class="content">
-
-<h2>Task Manager</h2>
-
-<p>
-A productivity application for organizing daily activities,
-tracking progress, and improving workflow efficiency.
-</p>
-
-<div class="tags">
-<div class="tag">JavaScript</div>
-<div class="tag">Firebase</div>
-<div class="tag">UI</div>
-</div>
-
-<div class="buttons">
-<a href="#" class="btn github">GitHub</a>
-<a href="#" class="btn demo">Live Demo</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="image">
-🚀
-</div>
-
-<div class="content">
-
-<h2>Future Project</h2>
-
-<p>
-Currently working on exciting new software solutions involving
-modern technologies and cloud-based applications.
-Stay tuned!
-</p>
-
-<div class="tags">
-<div class="tag">Coming Soon</div>
-<div class="tag">Innovation</div>
-</div>
-
-<div class="buttons">
-<a href="#" class="btn github">GitHub</a>
-<a href="#" class="btn demo">Preview</a>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="cta">
-
-<h2>Interested in Working Together?</h2>
-
-<p>
-I'm always excited to collaborate on meaningful projects, freelance opportunities,
-and innovative ideas. Let's build something amazing together.
-</p>
-
-<a href="about.html">Contact Me</a>
-
-</section>
 
 <footer>
-
-<p>
-© {% now "Y" %} Veeveesh Portfolio. Designed with Django, HTML & CSS.
-</p>
-
+  <p>© {% now "Y" %} Veeveesh. Built with Django &amp; CSS.</p>
+  <div class="footer-links">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'skills' %}">Skills</a>
+  </div>
 </footer>
+
+
+
+<script>
+(function(){
+  const root = document.documentElement;
+  const btn  = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') root.setAttribute('data-theme','dark');
+  btn.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-theme');
+      localStorage.setItem('theme','light');
+    } else {
+      root.setAttribute('data-theme','dark');
+      localStorage.setItem('theme','dark');
+    }
+  });
+})();
+</script>
+
+<script>
+const btn = document.getElementById('hamburger');
+const nav = document.getElementById('mobileNav');
+btn.addEventListener('click', () => {
+  btn.classList.toggle('open');
+  nav.classList.toggle('open');
+});
+nav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    btn.classList.remove('open');
+    nav.classList.remove('open');
+  });
+});
+</script>
 
 </body>
 </html>
